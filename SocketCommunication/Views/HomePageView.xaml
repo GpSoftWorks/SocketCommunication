@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SocketCommunication.Views.HomePageView"
+             Title="Home">
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="BackgroundColor" Value="#f9f9f9" />
+            <Setter Property="Shadow" Value="True" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15" BackgroundColor="#ffffff">
+
+            <!-- Header Section -->
+            <Frame BackgroundColor="#6200EE">
+                <Label Text="Socket Communication" 
+                       FontSize="Large" 
+                       TextColor="White" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       FontAttributes="Bold" />
+            </Frame>
+
+            <!-- Server Status -->
+            <Frame>
+                <StackLayout>
+                    <Label Text="Server Status:" 
+                           FontSize="Medium" 
+                           FontAttributes="Bold" />
+                    <Label Text="{Binding Messages}" 
+                           FontSize="Small" 
+                           TextColor="Gray" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Server IP Entry -->
+            <Frame>
+                <StackLayout>
+                    <Label Text="Enter Server IP:" 
+                           FontSize="Medium" 
+                           FontAttributes="Bold" />
+                    <Entry x:Name="ServerIpEntry" 
+                           Placeholder="Enter Server IP" 
+                           Text="{Binding ServerIp}" 
+                           Keyboard="Email" 
+                           BackgroundColor="#f0f0f0" 
+                           HeightRequest="40" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Server Controls -->
+            <Frame>
+                <FlexLayout Direction="Row" 
+                            JustifyContent="SpaceBetween" 
+                            AlignItems="Center">
+                    <Button Text="Start Server" 
+                            Command="{Binding StartServerCommand}" 
+                            BackgroundColor="#6200EE" 
+                            TextColor="White" 
+                            CornerRadius="20" 
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding IsClientConnected}" />
+                    <Button Text="Connect" 
+                            Command="{Binding ConnectCommand}" 
+                            BackgroundColor="#03DAC6" 
+                            TextColor="White" 
+                            CornerRadius="20" 
+                            HorizontalOptions="FillAndExpand" />
+                </FlexLayout>
+            </Frame>
+
+            <!-- Connection Status -->
+            <Frame>
+                <Label Text="{Binding HandshakeMessage}" 
+                       FontSize="Small" 
+                       TextColor="Green" />
+            </Frame>
+
+            <!-- Message Input and Send -->
+            <Frame>
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Label Text="Messages:" FontSize="Medium" />
+                    <ScrollView>
+                        <Label Text="{Binding Messages}" 
+                               LineBreakMode="WordWrap" />
+                    </ScrollView>
+                    <Entry Placeholder="Type a message..." 
+                           Text="{Binding Message}" />
+                    <Button Text="Send Message" 
+                            Command="{Binding SendMessageCommand}" 
+                            IsEnabled="{Binding IsClientConnected}" />
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
